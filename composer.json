@@ -21,7 +21,7 @@
     },
     "require": {
         "php": "^7.3.11",
-        "guzzlehttp/guzzle": "^7.0",
+        "guzzlehttp/guzzle": "^6.5 || ^7.0",
         "laminas/laminas-xml2json": "^3.1",
         "koriym/http-constants": "^1.1",
         "ext-json": "*"
