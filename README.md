@@ -1,3 +1,7 @@
+[![Packagist](https://img.shields.io/badge/packagist-v1.0.1-blue.svg)](https://github.com/chanshige/houjin-bangou)
+[![Build Status](https://travis-ci.com/chanshige/houjin-bangou.svg?branch=master)](https://travis-ci.com/chanshige/houjin-bangou)
+[![Coverage Status](https://coveralls.io/repos/github/chanshige/houjin-bangou/badge.svg)](https://coveralls.io/github/chanshige/houjin-bangou)
+
 # houjin-bangou
 'chanshige/houjin-bangou' is that helps search for corporate information registered in the NTA(National Tax Agency)
   
