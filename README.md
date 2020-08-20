@@ -6,15 +6,16 @@
 'chanshige/houjin-bangou' is that helps search for corporate information registered in the NTA(National Tax Agency)
   
 法人番号システム Web-API を便利に使うライブラリです  
-※ Web-APIを利用するためには、アプリケーションIDが必要です。
 
 @see https://www.houjin-bangou.nta.go.jp/webapi/
 
+※ Web-APIを利用するためには、アプリケーションIDが必要です。  
+※Laravelでもすぐに使えるProviderを用意しています。
+
 ## Installation
-without packagist
+with composer
 ```shell script
-$ composer config repositories.chanshige/houjin-bangou vcs https://github.com/chanshige/houjin-bangou.git
-$ composer require chanshige/houjin-bangou:^1.0
+$ composer require chanshige/houjin-bangou
 ```
 
 ## Usage
