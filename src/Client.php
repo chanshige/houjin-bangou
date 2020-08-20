@@ -43,11 +43,11 @@ final class Client implements ClientInterface
     private function baseUriByCondition(ConditionInterface $condition): string
     {
         return 'https://api.houjin-bangou.nta.go.jp/4/' . $condition . '?'
-            . $this->buildByQuery($condition->payload());
+            . $this->buildQuery($condition->payload());
     }
 
-    private function buildByQuery(array $payload)
+    private function buildQuery(array $query)
     {
-        return http_build_query(array_merge(['id' => $this->applicationId], $payload), '', '&', PHP_QUERY_RFC1738);
+        return http_build_query(array_merge(['id' => $this->applicationId], $query), '', '&', PHP_QUERY_RFC1738);
     }
 }
