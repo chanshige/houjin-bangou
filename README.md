@@ -1,4 +1,4 @@
-[![Packagist](https://img.shields.io/badge/packagist-v1.0.1-blue.svg)](https://github.com/chanshige/houjin-bangou)
+[![Packagist](https://img.shields.io/badge/packagist-v1.0.2-blue.svg)](https://github.com/chanshige/houjin-bangou)
 [![Build Status](https://travis-ci.com/chanshige/houjin-bangou.svg?branch=master)](https://travis-ci.com/chanshige/houjin-bangou)
 [![Coverage Status](https://coveralls.io/repos/github/chanshige/houjin-bangou/badge.svg)](https://coveralls.io/github/chanshige/houjin-bangou)
 
@@ -9,8 +9,8 @@
 
 @see https://www.houjin-bangou.nta.go.jp/webapi/
 
-※ Web-APIを利用するためには、アプリケーションIDが必要です。  
-※Laravelでもすぐに使えるProviderを用意しています。
+※ Web-APIを利用するためには、アプリケーションIDが必要です。 
+※ Laravelで利用する際のProvider登録サンプルを記載しております。 
 
 ## Installation
 with composer
@@ -38,10 +38,39 @@ echo $response->body(); //XML(Original)
 // or $response->toArray();
 ```
 ### for Laravel
-#### add ServiceProvider
+#### create ServiceProvider class.
+```
+
+use Chanshige\HoujinBangou\Client;
+use Chanshige\HoujinBangou\Contracts\ClientInterface;
+use GuzzleHttp\Client as GuzzleClient;
+use Illuminate\Support\ServiceProvider;
+
+class HoujinBangouServiceProvider extends ServiceProvider
+{
+    public function register()
+    {
+        $this->app->singleton(ClientInterface::class, function () {
+            return new Client(
+                new GuzzleClient(),
+                config('services.houjin_bangou.application_id')
+            );
+        });
+    }
+
+    public function provides()
+    {
+        return [
+            ClientInterface::class
+        ];
+    }
+}
+```
+
+#### append providers to config/app.php
 ```
 'providers' => [
-    Chanshige\HoujinBangou\Laravel\ClientServiceProvider::class    
+    App\Providers\HoujinBangouServiceProvider::class    
 ]
 ```
 
