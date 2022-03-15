@@ -1,14 +1,16 @@
 <?php
 
-namespace Chanshige\HoujinBangou\Condition;
+declare(strict_types=1);
 
-use Chanshige\HoujinBangou\Condition\Criteria\CorporateName;
-use Chanshige\HoujinBangou\Condition\Criteria\CorporateNumber;
+namespace Chanshige\NTA\Condition;
+
+use Chanshige\NTA\Condition\Criteria\CorporateName;
+use Chanshige\NTA\Condition\Criteria\CorporateNumber;
 use PHPUnit\Framework\TestCase;
 
 class ConditionTest extends TestCase
 {
-    public function testCorporateNameCondition()
+    public function testCorporateNameCondition(): void
     {
         $expected = [
             'name' => 'テスト名前',
@@ -23,7 +25,7 @@ class ConditionTest extends TestCase
         $this->assertEquals($expected, $condition->payload());
     }
 
-    public function testCorporateNumberCondition()
+    public function testCorporateNumberCondition(): void
     {
         $expected = [
             'type' => 12,

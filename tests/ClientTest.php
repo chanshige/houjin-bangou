@@ -1,9 +1,11 @@
 <?php
 
-namespace Chanshige\HoujinBangou;
+declare(strict_types=1);
 
-use Chanshige\HoujinBangou\Condition\Criteria\CorporateName;
-use Chanshige\HoujinBangou\Contracts\ResponseInterface;
+namespace Chanshige\NTA;
+
+use Chanshige\NTA\Condition\Criteria\CorporateName;
+use Chanshige\NTA\Contracts\ResponseInterface;
 use GuzzleHttp\ClientInterface;
 use Koriym\HttpConstants\StatusCode;
 use PHPUnit\Framework\TestCase;
@@ -12,7 +14,12 @@ use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
 class ClientTest extends TestCase
 {
-    public function testInvoke()
+    public function testFactory(): void
+    {
+        $this->assertInstanceOf(HoujinBangou::class, HoujinBangouFactory::newInstance('test_id'));
+    }
+
+    public function testInvoke(): void
     {
         $response = M::mock(PsrResponseInterface::class);
         $response->shouldReceive('getStatusCode')->andReturn(StatusCode::OK);
@@ -27,7 +34,7 @@ class ClientTest extends TestCase
             return $response;
         });
 
-        $houjin = new Client($client, 'application_id');
+        $houjin = new HoujinBangou($client, 'application_id');
         $response = $houjin((new CorporateName())->name('株式会社法人名'));
 
         $this->assertInstanceOf(ResponseInterface::class, $response);
@@ -38,7 +45,7 @@ class ClientTest extends TestCase
         $this->assertEquals($this->array(), $response->toArray());
     }
 
-    private function xml()
+    private function xml(): string
     {
         return <<<EOS
 <?xml version="1.0" encoding="UTF-8"?>
@@ -83,12 +90,12 @@ class ClientTest extends TestCase
 EOS;
     }
 
-    private function json()
+    private function json(): string
     {
         return '{"corporations":{"lastUpdateDate":"2020-08-20","count":"1","divideNumber":"1","divideSize":"1","corporation":{"sequenceNumber":"1","corporateNumber":"1290001089235","process":"01","correct":"0","updateDate":"2020-06-24","changeDate":"2020-06-24","name":"\u682a\u5f0f\u4f1a\u793e\u30ea\u30af\u30e1\u30c7\u30a3\u30a2","nameImageId":"","kind":"301","prefectureName":"\u798f\u5ca1\u770c","cityName":"\u798f\u5ca1\u5e02\u4e2d\u592e\u533a","streetNumber":"\u5929\u795e\uff11","addressImageId":"","prefectureCode":"40","cityCode":"133","postCode":"8100001","addressOutside":"","addressOutsideImageId":"","closeDate":"","closeCause":"","successorCorporateNumber":"","changeCause":"","assignmentDate":"2020-06-24","latest":"1","enName":"","enPrefectureName":"","enCityName":"","enAddressOutside":"","furigana":"\u30ea\u30af\u30e1\u30c7\u30a3\u30a2","hihyoji":"0"}}}';
     }
 
-    private function array()
+    private function array(): array
     {
         return [
             "corporations" => [
