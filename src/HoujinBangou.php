@@ -2,28 +2,22 @@
 
 declare(strict_types=1);
 
-namespace Chanshige\HoujinBangou;
+namespace Chanshige\NTA;
 
-use Chanshige\HoujinBangou\Contracts\ClientInterface;
-use Chanshige\HoujinBangou\Contracts\ConditionInterface;
-use Chanshige\HoujinBangou\Contracts\ResponseInterface;
-use Chanshige\HoujinBangou\Exception\ClientException;
+use Chanshige\NTA\Contracts\HoujinBangouInterface;
+use Chanshige\NTA\Contracts\ConditionInterface;
+use Chanshige\NTA\Contracts\ResponseInterface;
+use Chanshige\NTA\Exception\HoujinBangouException;
 use GuzzleHttp\ClientInterface as GuzzleHttpClientInterface;
 use Koriym\HttpConstants\Method;
 use Throwable;
 
-final class Client implements ClientInterface
+final class HoujinBangou implements HoujinBangouInterface
 {
-    /** @var GuzzleHttpClientInterface $http */
-    private $http;
-
-    /** @var string $applicationId */
-    private $applicationId;
-
-    public function __construct(GuzzleHttpClientInterface $http, string $applicationId)
-    {
-        $this->http = $http;
-        $this->applicationId = $applicationId;
+    public function __construct(
+        private GuzzleHttpClientInterface $http,
+        private string $applicationId
+    ) {
     }
 
     public function __invoke(ConditionInterface $condition): ResponseInterface
@@ -36,7 +30,7 @@ final class Client implements ClientInterface
 
             return new Response($response);
         } catch (Throwable $e) {
-            throw new ClientException($e->getMessage(), $e->getCode());
+            throw new HoujinBangouException($e->getMessage(), $e->getCode());
         }
     }
 
@@ -46,7 +40,7 @@ final class Client implements ClientInterface
             . $this->buildQuery($condition->payload());
     }
 
-    private function buildQuery(array $query)
+    private function buildQuery(array $query): string
     {
         return http_build_query(array_merge(['id' => $this->applicationId], $query), '', '&', PHP_QUERY_RFC1738);
     }

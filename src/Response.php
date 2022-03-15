@@ -2,20 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Chanshige\HoujinBangou;
+namespace Chanshige\NTA;
 
-use Chanshige\HoujinBangou\Contracts\ResponseInterface;
+use Chanshige\NTA\Contracts\ResponseInterface;
 use Laminas\Xml2Json\Xml2Json;
 use Psr\Http\Message\ResponseInterface as PsrResponseInterface;
 
 class Response implements ResponseInterface
 {
-    /** @var PsrResponseInterface $response */
-    private $response;
-
-    public function __construct(PsrResponseInterface $response)
-    {
-        $this->response = $response;
+    public function __construct(
+        private PsrResponseInterface $response
+    ) {
     }
 
     public function statusCode(): int

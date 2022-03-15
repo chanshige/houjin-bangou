@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Chanshige\HoujinBangou\Exception;
+namespace Chanshige\NTA\Exception;
 
 use InvalidArgumentException;
 

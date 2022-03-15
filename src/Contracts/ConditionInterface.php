@@ -1,6 +1,8 @@
 <?php
 
-namespace Chanshige\HoujinBangou\Contracts;
+declare(strict_types=1);
+
+namespace Chanshige\NTA\Contracts;
 
 interface ConditionInterface
 {

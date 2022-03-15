@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Chanshige\HoujinBangou\Condition\Criteria;
+namespace Chanshige\NTA\Condition\Criteria;
 
-use Chanshige\HoujinBangou\Condition\AbstractCondition;
+use Chanshige\NTA\Condition\AbstractCondition;
 
 class CorporateNumber extends AbstractCondition
 {
-    protected $number;
+    protected int $number;
 
-    public function number(int $number)
+    public function number(int $number): self
     {
         $this->number = $number;
 

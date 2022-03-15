@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Chanshige\HoujinBangou\Condition\Criteria;
+namespace Chanshige\NTA\Condition\Criteria;
 
-use Chanshige\HoujinBangou\Condition\AbstractCondition;
+use Chanshige\NTA\Condition\AbstractCondition;
 
 final class CorporateName extends AbstractCondition
 {
-    protected $name;
+    protected string $name;
 
-    public function name(string $name)
+    public function name(string $name): self
     {
         $this->name = $name;
 

@@ -2,11 +2,10 @@
 
 require __DIR__ . '/../vendor/autoload.php';
 
-use GuzzleHttp\Client as GuzzleClient;
-use Chanshige\HoujinBangou\Client;
-use Chanshige\HoujinBangou\Condition\Criteria\CorporateName;
+use Chanshige\NTA\HoujinBangouFactory;
+use Chanshige\NTA\Condition\Criteria\CorporateName;
 
-$houjin = new Client(new GuzzleClient(), 'application_id');
+$houjin =  HoujinBangouFactory::newInstance('application_id');
 
 $condition = new CorporateName();
 $condition->name('カラビナテクノロジー');
